@@ -1,0 +1,220 @@
+/* tiltcard.css - 3D Tilt Card Effect Styles */
+
+.tilt-card-wrapper {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+
+.tilt-behind {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(125, 190, 255, 0.3) 0%,
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 24px;
+}
+
+.tilt-card-shell.active ~ .tilt-behind,
+.tilt-card-shell.active + .tilt-behind {
+  opacity: 1;
+}
+
+.tilt-card-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--rotate-x)) rotateX(var(--rotate-y));
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.tilt-card-shell.entering {
+  transition: transform 0.18s ease-out;
+}
+
+.tilt-card-shell:not(.active) {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tilt-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.tilt-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Shine effect */
+.tilt-shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 24px;
+}
+
+.tilt-card-shell.active .tilt-shine {
+  opacity: 1;
+}
+
+/* Glare effect */
+.tilt-glare {
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 80%
+  );
+  transform: translateX(calc(var(--pointer-from-left) * 200% - 100%))
+    translateY(calc(var(--pointer-from-top) * 200% - 100%));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.tilt-card-shell.active .tilt-glare {
+  opacity: calc(var(--pointer-from-center) * 0.4);
+}
+
+/* Article card specific styles */
+.article-tilt-card {
+  height: 400px;
+  display: block;
+}
+
+.article-tilt-card .tilt-card-shell {
+  cursor: pointer;
+}
+
+.article-tilt-card .tilt-card-inner {
+  background: #1f2937;
+}
+
+.article-tilt-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.article-tilt-card .tilt-card-shell.active img {
+  transform: scale(1.05);
+}
+
+.article-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 24px;
+}
+
+.article-text-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  z-index: 2;
+}
+
+.article-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 0.5rem 0;
+  transition: transform 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.tilt-card-shell.active .article-title {
+  transform: translateY(-2px);
+}
+
+.article-author {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Gradient card variant */
+.article-gradient-card .tilt-card-inner {
+  background: linear-gradient(135deg, #0081c0 0%, #005a8d 100%);
+}
+
+.article-gradient-card .article-image-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .article-text-content {
+    padding: 1rem 1.5rem;
+  }
+
+  .article-title {
+    font-size: 1.125rem;
+  }
+
+  .article-tilt-card {
+    height: 350px;
+  }
+}
+
+@media (max-width: 640px) {
+  .article-tilt-card {
+    height: 320px;
+  }
+}

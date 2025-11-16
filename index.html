@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="e68cf02ccb281c50.css" data-precedence="next" />
     <link rel="stylesheet" href="tiltcard.css" />
     <script src="4bd1b696-cf72ae8a39fa05aa.js" async=""></script>
+    <script src="hero-glass-effect.js" defer></script>
     <script src="hero-time-switch.js" defer></script>
     <script src="tiltcard.js" defer></script>
     <title>General Intelligence Company</title>
@@ -8052,16 +8053,16 @@
                     <span class="border-b border-[#B4B8B4] text-[#B4B8B4] cursor-pointer">multiple fields</span>
                     <div class="absolute inset-0 pointer-events-none multiple-fields-tags">
                         <span class="field-tag field-tag-glass" style="top: -10px; left: 50%; transform: translateX(-50%);">
-                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Coding</p>
+                            <p class="font-af font-bold tracking-[-0.15px] text-black text-nowrap text-[13px] md:text-[15px] leading-[100%]">Coding</p>
                         </span>
                         <span class="field-tag field-tag-glass" style="top: -10px; right: -90px;">
-                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Customer Support</p>
+                            <p class="font-af font-bold tracking-[-0.15px] text-black text-nowrap text-[13px] md:text-[15px] leading-[100%]">Customer Support</p>
                         </span>
                         <span class="field-tag field-tag-glass" style="bottom: -25px; left: -2px;">
-                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Marketing</p>
+                            <p class="font-af font-bold tracking-[-0.15px] text-black text-nowrap text-[13px] md:text-[15px] leading-[100%]">Marketing</p>
                         </span>
                         <span class="field-tag field-tag-glass" style="bottom: -25px; right: -8px;">
-                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Sales</p>
+                            <p class="font-af font-bold tracking-[-0.15px] text-black text-nowrap text-[13px] md:text-[15px] leading-[100%]">Sales</p>
                         </span>
                     </div>
                 </span>
@@ -9961,7 +9962,7 @@ if (document.readyState === "loading") {
           mobile: "hero-3-mob.avif",
         },
         evening: {
-          desktop: "hero-eve.avif",
+          desktop: "hero-eve.png",
           mobile: "hero-eve-mob.avif",
         },
         night: {
@@ -10086,6 +10087,38 @@ if (document.readyState === "loading") {
       }
 
       document.body.style.overflow = "hidden";
+    </script>
+
+    <!-- Hero Glass Effect Initialization -->
+    <script>
+      // Wait for DOM and preloader to complete
+      function initHeroGlassEffect() {
+        const heroSection = document.querySelector('#hero');
+        if (!heroSection) {
+          console.warn('Hero section not found');
+          return;
+        }
+
+        // Initialize interactive glass lens effect
+        const glassLens = new HeroGlassEffect(heroSection, {
+          scale: 1,
+          ior: 1.45,
+          thickness: 11,
+          chromaticAberration: 0.6,
+          anisotropy: 0.4,
+          lensSize: 300,
+          blur: 0
+        });
+
+        console.log('✨ Hero glass effect initialized');
+      }
+
+      // Initialize after preloader completes
+      setTimeout(() => {
+        if (typeof HeroGlassEffect !== 'undefined') {
+          initHeroGlassEffect();
+        }
+      }, 7000); // After preloader animation (~6-7 seconds)
     </script>
    
   </body>

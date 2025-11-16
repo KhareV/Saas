@@ -19,8 +19,8 @@
       mobile: "hero-3.avif", // Using desktop image for mobile
     },
     evening: {
-      desktop: "hero-eve.avif",
-      mobile: "hero-eve.avif", // Using desktop image for mobile
+      desktop: "hero-eve.png",
+      mobile: "hero-eve-mob.avif",
     },
     night: {
       desktop: "hero-4.avif",

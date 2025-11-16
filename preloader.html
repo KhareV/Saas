@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to New York</title>
+
+    <style>
+      /* ============================================
+       RESET & BASE STYLES
+       ============================================ */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #1a1410;
+        text-align: center;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      /* ============================================
+       PRELOADER CONTAINER
+       ============================================ */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1a1410;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.6s ease-out;
+      }
+
+      #preloader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* ============================================
+       ANIMATION CONTAINER
+       ============================================ */
+      #animation-container {
+        width: 90%;
+        max-width: 900px;
+        height: auto;
+        min-height: 400px;
+        position: relative;
+        transform: scale(1);
+        transition: transform 0.6s ease-out;
+      }
+
+      #preloader.fade-out #animation-container {
+        transform: scale(1.02);
+      }
+
+      /* Vara.js will inject SVG here */
+      #vara-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      #vara-container svg {
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      /* Heart container */
+      #heart-container {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      #heart-container.show {
+        opacity: 1;
+      }
+
+      #heart-svg {
+        width: 120px;
+        height: 120px;
+      }
+
+      .heart-outline {
+        fill: none;
+        stroke: #ff3b30;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 400;
+        stroke-dashoffset: 400;
+        filter: drop-shadow(0 2px 8px rgba(255, 59, 48, 0.4));
+      }
+
+      .heart-outline.animate {
+        animation: drawHeart 1.5s ease-out forwards;
+      }
+
+      @keyframes drawHeart {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .heart-fill {
+        fill: #ff3b30;
+        opacity: 0;
+        transform-origin: center;
+      }
+
+      .heart-fill.animate {
+        animation: fillHeart 1.2s ease-out forwards;
+      }
+
+      @keyframes fillHeart {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 0.95;
+          transform: scale(1);
+        }
+      }
+
+      /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+      @media (max-width: 768px) {
+        #animation-container {
+          width: 95%;
+          min-height: 300px;
+        }
+
+        #heart-container {
+          bottom: -60px;
+        }
+
+        #heart-svg {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      /* ============================================
+       ACCESSIBILITY
+       ============================================ */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #preloader {
+          animation: simpleFadeOut 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes simpleFadeOut {
+          to {
+            opacity: 0;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================
+       PRELOADER WITH VARA.JS ANIMATION
+       ============================================ -->
+    <div id="preloader" role="status" aria-live="polite">
+      <div id="animation-container">
+        <!-- Vara.js will create SVG animations here -->
+        <div id="vara-container"></div>
+
+        <!-- Heart SVG - appears after text -->
+        <div id="heart-container">
+          <svg
+            id="heart-svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Heart outline -->
+            <path
+              class="heart-outline"
+              d="M 50 85 L 20 55 C 10 45, 10 30, 20 20 C 30 10, 45 15, 50 25 C 55 15, 70 10, 80 20 C 90 30, 90 45, 80 55 Z"
+            />
+
+            <!-- Heart fill -->
+            <path
+              class="heart-fill"
+              d="M 50 85 L 20 55 C 10 45, 10 30, 20 20 C 30 10, 45 15, 50 25 C 55 15, 70 10, 80 20 C 90 30, 90 45, 80 55 Z"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Screen reader announcement -->
+      <span class="sr-only" id="preloader-status"
+        >Loading... Welcome to New York</span
+      >
+    </div>
+
+    <!-- ============================================
+       VARA.JS LIBRARY - CDN
+       ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/vara@1.4.0/src/vara.min.js"></script>
+
+    <!-- ============================================
+       JAVASCRIPT - ANIMATION CONTROL
+       ============================================ -->
+    <script>
+      // ============================================
+      // HERO TIME-BASED IMAGE SWITCHER (Pre-initialization)
+      // ============================================
+      // Run this BEFORE showing the site to prevent abrupt hero image changes
+
+      const MORNING_START = 6;
+      const AFTERNOON_START = 12;
+      const EVENING_START = 17;
+      const NIGHT_START = 20;
+
+      const IMAGES = {
+        morning: {
+          desktop: "hero-2.avif",
+          mobile: "hero-mobile-2.avif",
+        },
+        afternoon: {
+          desktop: "hero-3.avif",
+          mobile: "hero-3-mob.avif",
+        },
+        evening: {
+          desktop: "hero-eve.avif",
+          mobile: "hero-eve-mob.avif",
+        },
+        night: {
+          desktop: "hero-4.avif",
+          mobile: "hero-mobile-4.avif",
+        },
+      };
+
+      function getCurrentTimeOfDay() {
+        const hour = new Date().getHours();
+        if (hour >= MORNING_START && hour < AFTERNOON_START) {
+          return "morning";
+        } else if (hour >= AFTERNOON_START && hour < EVENING_START) {
+          return "afternoon";
+        } else if (hour >= EVENING_START && hour < NIGHT_START) {
+          return "evening";
+        } else {
+          return "night";
+        }
+      }
+
+      function preloadHeroImages() {
+        const timeOfDay = getCurrentTimeOfDay();
+        const imageSet = IMAGES[timeOfDay];
+
+        // Preload the correct images for current time
+        const desktopImg = new Image();
+        desktopImg.src = imageSet.desktop;
+
+        const mobileImg = new Image();
+        mobileImg.src = imageSet.mobile;
+
+        console.log(`Preloader: Preloading ${timeOfDay} hero images`);
+      }
+
+      // Preload images immediately
+      preloadHeroImages();
+
+      // ============================================
+      // PRELOADER ANIMATION
+      // ============================================
+
+      // Check if user prefers reduced motion
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        // Skip animation and show content immediately
+        setTimeout(hidePreloader, 1000);
+      } else {
+        // Create Vara.js animation
+        // Using the built-in font from Vara.js CDN
+        var vara = new Vara(
+          "#vara-container",
+          "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Satisfy/SatisfySL.json",
+          [
+            {
+              text: "welcome to",
+              fontSize: 42,
+              strokeWidth: 1.5,
+              color: "#f5f5dc",
+              id: "welcome",
+              duration: 2500,
+              textAlign: "center",
+              y: 20,
+              letterSpacing: 2,
+            },
+            {
+              text: "NEW YORK",
+              fontSize: 72,
+              strokeWidth: 2.5,
+              color: "#f5f5dc",
+              id: "newyork",
+              duration: 2800,
+              delay: 200,
+              textAlign: "center",
+              y: 100,
+              letterSpacing: 8,
+            },
+          ],
+          {
+            autoAnimation: true,
+            queued: true,
+          }
+        );
+
+        // Wait for Vara to be ready
+        vara.ready(function () {
+          console.log("Vara is ready!");
+        });
+
+        // Listen for animation end
+        vara.animationEnd(function (id, group) {
+          console.log("Animation ended for:", id);
+
+          // When the last text finishes, show the heart
+          if (id === "newyork" || id === 1) {
+            setTimeout(showHeart, 300);
+          }
+        });
+
+        // Function to animate the heart
+        function showHeart() {
+          const heartContainer = document.getElementById("heart-container");
+          const heartOutline = document.querySelector(".heart-outline");
+          const heartFill = document.querySelector(".heart-fill");
+
+          // Show heart container
+          heartContainer.classList.add("show");
+
+          // Start heart outline animation
+          setTimeout(() => {
+            heartOutline.classList.add("animate");
+          }, 100);
+
+          // Start heart fill animation after outline completes
+          setTimeout(() => {
+            heartFill.classList.add("animate");
+          }, 1600);
+
+          // Hide preloader after all animations complete
+          setTimeout(hidePreloader, 3500);
+        }
+      }
+
+      // Function to hide preloader and show content
+      function hidePreloader() {
+        const preloader = document.getElementById("preloader");
+        const status = document.getElementById("preloader-status");
+
+        // Announce completion to screen readers
+        status.textContent = "Welcome to New York. Page loaded.";
+
+        // Fade out preloader
+        preloader.classList.add("fade-out");
+
+        // After fade transition, hide preloader completely and redirect
+        setTimeout(() => {
+          preloader.style.display = "none";
+          document.body.style.overflow = "auto";
+          // Redirect to main site
+          window.location.href = "index.html";
+        }, 600);
+      }
+
+      // Prevent scroll during preloader
+      document.body.style.overflow = "hidden";
+    </script>
+  </body>
+</html>

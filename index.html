@@ -14,6 +14,158 @@
     <script src="hero-time-switch.js" defer></script>
     <script src="tiltcard.js" defer></script>
     <title>General Intelligence Company</title>
+    
+    <!-- Preloader Styles -->
+    <style>
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1a1410;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        opacity: 1;
+        transition: opacity 0.6s ease-out;
+      }
+
+      #preloader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #animation-container {
+        width: 90%;
+        max-width: 900px;
+        height: auto;
+        min-height: 400px;
+        position: relative;
+        transform: scale(1);
+        transition: transform 0.6s ease-out;
+      }
+
+      #preloader.fade-out #animation-container {
+        transform: scale(1.02);
+      }
+
+      #vara-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      #vara-container svg {
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      #heart-container {
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      #heart-container.show {
+        opacity: 1;
+      }
+
+      #heart-svg {
+        width: 120px;
+        height: 120px;
+      }
+
+      .heart-outline {
+        fill: none;
+        stroke: #ff3b30;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 400;
+        stroke-dashoffset: 400;
+        filter: drop-shadow(0 2px 8px rgba(255, 59, 48, 0.4));
+      }
+
+      .heart-outline.animate {
+        animation: drawHeart 1.5s ease-out forwards;
+      }
+
+      @keyframes drawHeart {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .heart-fill {
+        fill: #ff3b30;
+        opacity: 0;
+        transform-origin: center;
+      }
+
+      .heart-fill.animate {
+        animation: fillHeart 1.2s ease-out forwards;
+      }
+
+      @keyframes fillHeart {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 0.95;
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 768px) {
+        #animation-container {
+          width: 95%;
+          min-height: 300px;
+        }
+
+        #heart-container {
+          bottom: -30px;
+        }
+
+        #heart-svg {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #preloader {
+          animation: simpleFadeOut 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes simpleFadeOut {
+          to {
+            opacity: 0;
+          }
+        }
+      }
+    </style>
     <meta
       name="description"
       content="Automate your life with natural language. Cofounder plugs into your existing tools, writes automations, and organizes workflows. Driving the software you&#x27;re already familiar with."
@@ -49,6 +201,30 @@
     class="__variable_5567bd __variable_12efe5 __variable_9a8899 antialiased bg-neutral-50"
     
   >
+    <!-- Preloader -->
+    <div id="preloader" role="status" aria-live="polite">
+      <div id="animation-container">
+        <div id="vara-container"></div>
+        <div id="heart-container">
+          <svg
+            id="heart-svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="heart-outline"
+              d="M 50 85 L 20 55 C 10 45, 10 30, 20 20 C 30 10, 45 15, 50 25 C 55 15, 70 10, 80 20 C 90 30, 90 45, 80 55 Z"
+            />
+            <path
+              class="heart-fill"
+              d="M 50 85 L 20 55 C 10 45, 10 30, 20 20 C 30 10, 45 15, 50 25 C 55 15, 70 10, 80 20 C 90 30, 90 45, 80 55 Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <span class="sr-only" id="preloader-status">Loading... Welcome to New York</span>
+    </div>
+
     <div hidden="">
       <!--$-->
       <!--/$-->
@@ -9340,25 +9516,15 @@
             <div class="flex gap-1 text-center md:text-left">
               <span
                 class="font-af font-medium text-[13px] tracking-[-0.13px] leading-[130%] text-white"
-                >© The General Intelligence Company of New York 2025</span
+                >© Intelligence Company of New York 2025</span
               >
             </div>
             <div class="flex items-center gap-1">
               <span
                 class="font-af font-medium text-[13px] tracking-[-0.13px] leading-[130%] text-white"
-                >Design by</span
+                >Design by Vedant Khare</span
               >
-              <a href="https://altalogy.com/?ref=gic-website">
-                <button
-                  data-slot="button"
-                  class="justify-center gap-2 whitespace-nowrap font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer text-neutral-800 underline-offset-4 hover:text-neutral-900 duration-200 rounded focus-visible:ring-0 focus-visible:text-neutral-900 h-9 has-[&gt;svg]:px-3 text-[15px] tracking-[-0.15px] leading-[140%] opacity-70 hover:opacity-100 transition-opacity flex items-center p-0"
-                >
-                  <span
-                    class="font-af font-medium text-[13px] tracking-[-0.13px] leading-[130%] text-white"
-                    >Altalogy</span
-                  >
-                </button>
-              </a>
+              
             </div>
           </div>
           <div class="relative w-full h-[400px] xl:h-[500px]">
@@ -9774,6 +9940,153 @@ if (document.readyState === "loading") {
 
     </script>
     
+    <!-- Vara.js Library for Preloader -->
+    <script src="https://cdn.jsdelivr.net/npm/vara@1.4.0/src/vara.min.js"></script>
+    
+    <!-- Preloader Script -->
+    <script>
+      // Hero time-based image switcher - Pre-initialization
+      const MORNING_START = 6;
+      const AFTERNOON_START = 12;
+      const EVENING_START = 17;
+      const NIGHT_START = 20;
+
+      const IMAGES = {
+        morning: {
+          desktop: "hero-2.avif",
+          mobile: "hero-mobile-2.avif",
+        },
+        afternoon: {
+          desktop: "hero-3.avif",
+          mobile: "hero-3-mob.avif",
+        },
+        evening: {
+          desktop: "hero-eve.avif",
+          mobile: "hero-eve-mob.avif",
+        },
+        night: {
+          desktop: "hero-4.avif",
+          mobile: "hero-mobile-4.avif",
+        },
+      };
+
+      function getCurrentTimeOfDay() {
+        const hour = new Date().getHours();
+        if (hour >= MORNING_START && hour < AFTERNOON_START) {
+          return "morning";
+        } else if (hour >= AFTERNOON_START && hour < EVENING_START) {
+          return "afternoon";
+        } else if (hour >= EVENING_START && hour < NIGHT_START) {
+          return "evening";
+        } else {
+          return "night";
+        }
+      }
+
+      function preloadHeroImages() {
+        const timeOfDay = getCurrentTimeOfDay();
+        const imageSet = IMAGES[timeOfDay];
+        
+        const desktopImg = new Image();
+        desktopImg.src = imageSet.desktop;
+        
+        const mobileImg = new Image();
+        mobileImg.src = imageSet.mobile;
+        
+        console.log(`Preloader: Preloading ${timeOfDay} hero images`);
+      }
+
+      preloadHeroImages();
+
+      // Preloader animation
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        setTimeout(hidePreloader, 1000);
+      } else {
+        var vara = new Vara(
+          "#vara-container",
+          "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Satisfy/SatisfySL.json",
+          [
+            {
+              text: "welcome to",
+              fontSize: 42,
+              strokeWidth: 1.5,
+              color: "#f5f5dc",
+              id: "welcome",
+              duration: 2500,
+              textAlign: "center",
+              x: 0,
+              y: 20,
+              letterSpacing: 2,
+            },
+            {
+              text: "NEW YORK",
+              fontSize: 72,
+              strokeWidth: 2.5,
+              color: "#f5f5dc",
+              id: "newyork",
+              duration: 2800,
+              delay: 200,
+              textAlign: "center",
+              x: 0,
+              y: 50,
+              letterSpacing: 8,
+            },
+          ],
+          {
+            autoAnimation: true,
+            queued: true,
+          }
+        );
+
+        vara.ready(function () {
+          console.log("Vara is ready!");
+        });
+
+        vara.animationEnd(function (id, group) {
+          console.log("Animation ended for:", id);
+          if (id === "newyork" || id === 1) {
+            setTimeout(showHeart, 300);
+          }
+        });
+
+        function showHeart() {
+          const heartContainer = document.getElementById("heart-container");
+          const heartOutline = document.querySelector(".heart-outline");
+          const heartFill = document.querySelector(".heart-fill");
+
+          heartContainer.classList.add("show");
+
+          setTimeout(() => {
+            heartOutline.classList.add("animate");
+          }, 100);
+
+          setTimeout(() => {
+            heartFill.classList.add("animate");
+          }, 1600);
+
+          setTimeout(hidePreloader, 3500);
+        }
+      }
+
+      function hidePreloader() {
+        const preloader = document.getElementById("preloader");
+        const status = document.getElementById("preloader-status");
+
+        status.textContent = "Welcome to New York. Page loaded.";
+        preloader.classList.add("fade-out");
+
+        setTimeout(() => {
+          preloader.style.display = "none";
+          document.body.style.overflow = "auto";
+        }, 600);
+      }
+
+      document.body.style.overflow = "hidden";
+    </script>
    
   </body>
 </html>

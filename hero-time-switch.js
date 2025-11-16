@@ -1,16 +1,26 @@
-// hero-time-switch.js - Day/Night Hero Image Switcher
+// hero-time-switch.js - Time-based Hero Image Switcher
 
 (function () {
   "use strict";
 
-  // Configuration
-  const DAY_START = 6; // 6 AM
-  const NIGHT_START = 18; // 6 PM
+  // Configuration - Time periods
+  const MORNING_START = 6; // 6 AM
+  const AFTERNOON_START = 12; // 12 PM
+  const EVENING_START = 17; // 5 PM
+  const NIGHT_START = 20; // 8 PM
 
   const IMAGES = {
-    day: {
+    morning: {
       desktop: "hero-2.avif",
       mobile: "hero-mobile-2.avif",
+    },
+    afternoon: {
+      desktop: "hero-3.avif",
+      mobile: "hero-3.avif", // Using desktop image for mobile
+    },
+    evening: {
+      desktop: "hero-eve.avif",
+      mobile: "hero-eve.avif", // Using desktop image for mobile
     },
     night: {
       desktop: "hero-4.avif",
@@ -18,14 +28,23 @@
     },
   };
 
-  function isNightTime() {
+  function getCurrentTimeOfDay() {
     const hour = new Date().getHours();
-    return hour < DAY_START || hour >= NIGHT_START;
+
+    if (hour >= MORNING_START && hour < AFTERNOON_START) {
+      return "morning";
+    } else if (hour >= AFTERNOON_START && hour < EVENING_START) {
+      return "afternoon";
+    } else if (hour >= EVENING_START && hour < NIGHT_START) {
+      return "evening";
+    } else {
+      return "night";
+    }
   }
 
   function updateHeroImages() {
-    const isNight = isNightTime();
-    const imageSet = isNight ? IMAGES.night : IMAGES.day;
+    const timeOfDay = getCurrentTimeOfDay();
+    const imageSet = IMAGES[timeOfDay];
 
     // Update desktop images
     const desktop1 = document.getElementById("hero-desktop-1");
@@ -57,7 +76,11 @@
       preloadLink.href = imageSet.desktop;
     }
 
-    console.log(`Hero images updated: ${isNight ? "Night" : "Day"} mode`);
+    console.log(
+      `Hero images updated: ${
+        timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)
+      } mode`
+    );
   }
 
   // Check and update on page load

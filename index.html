@@ -836,7 +836,7 @@
                   class="sticky z-50 mb-4 ml-4 mr-4 md:mr-auto top-[calc(100vh-278px)] md:top-[calc(100vh-330px)] transition-opacity duration-300 ease-in-out"
                 >
                   <div
-                    class="p-5 lg:p-8 lg:pr-6 relative rounded-2xl backdrop-blur-[15px] border border-white/20 shadow-[0_2px_6px_0_rgba(0,0,0,0.15)] bg-gradient-to-r from-black/12 via-black/7 to-black/7 bg-clip-padding max-w-[500px]"
+                    class="hero-glass-card p-5 lg:p-8 lg:pr-6 relative rounded-2xl backdrop-blur-[15px] border border-white/20 shadow-[0_2px_6px_0_rgba(0,0,0,0.15)] bg-gradient-to-r from-black/12 via-black/7 to-black/7 bg-clip-padding max-w-[500px]"
                   >
                     <div class="flex relative z-10 flex-col gap-4 items-start">
                       <h2
@@ -7860,40 +7860,42 @@
         <div class="w-full bg-[#FEFFFC] overflow-clip lg:overflow-visible">
           <section
             id="coordinator-section"
-            class="2xl:px-30 xl:px-12 md:px-8 px-5 w-full mx-auto pt-[80px] lg:pt-[140px] min-h-[6000px] lg:min-h-[10000px] relative"
+            class="2xl:px-30 xl:px-12 md:px-8 px-5 w-full mx-auto pt-[80px] lg:pt-[140px] relative"
             data-navbar-theme="light"
           >
             <div
-              class="w-full mx-auto max-w-[1080px] lg:px-5 lg:sticky lg:h-[270px] lg:top-[100px]"
+              class="w-full mx-auto max-w-[1080px] lg:px-5 mb-[60vh] lg:mb-[80vh]"
             >
               <h2
-                class="font-medium font-mondwest text-[22px] sm:text-[28px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.44px] md:tracking-[-0.8px] lg:tracking-[-0.96px] leading-[120%] md:leading-[110%] text-left max-w-[28ch] pb-4 flex flex-col gap-8 transition-all duration-500 text-[#2C2C2C]"
+                class="coordinator-text font-medium font-mondwest text-[22px] sm:text-[28px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.44px] md:tracking-[-0.8px] lg:tracking-[-0.96px] leading-[120%] md:leading-[110%] text-left max-w-[28ch] pb-4 flex flex-col gap-8 transition-all duration-500 text-[#2C2C2C]"
                 style="text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05)"
               >
                 <span>
                   Existing specialized agents have shown success in
-                  <span
-                    class="relative inline-block px-1 pr-0.5 py-1 rounded transition-all duration-300"
-                    id="cardswap-container"
-                  >
-                    <div
-                      class="inline-block border-b border-[#B4B8B4] text-[#B4B8B4] cursor-pointer"
-                    >
-                      <span
-                        class="relative inline-flex gap-1"
-                        data-card-wrapper
-                      >
-                        <span class="card-label inline-block">Coding</span>
-                      </span>
+                   <span class="relative inline-block px-1 pr-0.5 py-1 rounded transition-all duration-300 multiple-fields-hover-container">
+                    <span class="border-b border-[#B4B8B4] text-[#B4B8B4] cursor-pointer">multiple fields</span>
+                    <div class="absolute inset-0 pointer-events-none multiple-fields-tags">
+                        <span class="field-tag field-tag-glass" style="top: -10px; left: 50%; transform: translateX(-50%);">
+                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Coding</p>
+                        </span>
+                        <span class="field-tag field-tag-glass" style="top: -10px; right: -90px;">
+                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Customer Support</p>
+                        </span>
+                        <span class="field-tag field-tag-glass" style="bottom: -25px; left: -2px;">
+                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Marketing</p>
+                        </span>
+                        <span class="field-tag field-tag-glass" style="bottom: -25px; right: -8px;">
+                            <p class="font-af font-bold tracking-[-0.15px] text-[#9DB0BD] text-nowrap text-[13px] md:text-[15px] leading-[100%]">Sales</p>
+                        </span>
                     </div>
-                  </span>
-                  but these are all isolated systems.
+                </span>
+                but these are all isolated systems.
                 </span>
                 <span>They need a coordinator.</span>
               </h2>
             </div>
             <div
-              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] z-10 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] z-10 transition-opacity duration-500"
               data-section="1"
             >
               <div
@@ -7975,7 +7977,7 @@
               </div>
             </div>
             <div
-              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] mt-[100vh] z-20 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] mt-[100vh] z-20 transition-opacity duration-500"
               data-section="2"
             >
               <div
@@ -8054,7 +8056,7 @@
               </div>
             </div>
             <div
-              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] mt-[100vh] z-30 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] mt-[100vh] z-30 transition-opacity duration-500"
               data-section="3"
             >
               <div
@@ -8133,7 +8135,7 @@
               </div>
             </div>
             <div
-              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] mt-[100vh] z-40 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] mt-[100vh] z-40 transition-opacity duration-500"
               data-section="4"
             >
               <div
@@ -8212,7 +8214,7 @@
               </div>
             </div>
             <div
-              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] mt-[100vh] z-50 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1080px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] mt-[100vh] z-50 transition-opacity duration-500"
               data-section="5"
             >
               <div
@@ -8291,7 +8293,7 @@
               </div>
             </div>
             <div
-              class="w-full mx-auto max-w-[1400px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[370px] mt-[100vh] z-60 transition-opacity duration-500"
+              class="w-full mx-auto max-w-[1400px] flex min-h-screen lg:min-h-[660px] flex-col items-start lg:px-5 overflow-clip sticky top-[50px] lg:top-[120px] mt-[100vh] z-60 transition-opacity duration-500"
               data-section="6"
             >
               <div class="w-full">

@@ -13,7 +13,9 @@ This will install all required packages from package.json.
 ## Step 2: Add Required Assets
 
 ### 3D Models
+
 You need to add 3 GLB files to `/public/assets/3d/`:
+
 - `lens.glb` - A cylinder shape (recommended for the fluid lens effect)
 - `cube.glb` - A cube shape
 - `bar.glb` - A rectangular bar shape
@@ -21,7 +23,9 @@ You need to add 3 GLB files to `/public/assets/3d/`:
 See `/public/assets/3D_MODELS_README.md` for instructions on creating these.
 
 ### Images
+
 Add 3 images to `/public/assets/demo/`:
+
 - `cs1.webp`
 - `cs2.webp`
 - `cs3.webp`
@@ -31,6 +35,7 @@ Or modify `src/FluidGlass.jsx` to use your existing images.
 ## Step 3: Build the 3D Component
 
 Run:
+
 ```bash
 npm run build
 ```
@@ -48,11 +53,16 @@ Add these lines to the `<head>` section of your `index.html`:
 Then, in the hero section (around line 706-710), add the 3D canvas container:
 
 ```html
-<div class="flex relative min-h-[800px] lg:min-h-auto flex-col justify-start items-start pt-20 w-full" style="aspect-ratio: 1553/1450">
-  
+<div
+  class="flex relative min-h-[800px] lg:min-h-auto flex-col justify-start items-start pt-20 w-full"
+  style="aspect-ratio: 1553/1450"
+>
   <!-- ADD THIS DIV FOR 3D CANVAS -->
-  <div id="hero-3d-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;"></div>
-  
+  <div
+    id="hero-3d-canvas"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none;"
+  ></div>
+
   <!-- existing hero images below -->
   <img id="hero-desktop-1" ... />
   ...
@@ -68,6 +78,7 @@ Add the script before the closing `</body>` tag:
 ## Step 5: Development Mode
 
 For development with hot reload:
+
 ```bash
 npm run dev
 ```
@@ -88,7 +99,7 @@ Edit `src/main.jsx`:
 <FluidGlass mode="cube" cubeProps={{ ... }} />
 
 // Bar mode (glass bar at bottom with nav items)
-<FluidGlass mode="bar" barProps={{ 
+<FluidGlass mode="bar" barProps={{
   navItems: [
     { label: 'Home', link: '/' },
     { label: 'About', link: '/about' }

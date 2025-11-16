@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import * as THREE from 'three';
-import { useRef, useState, useEffect, memo } from 'react';
-import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber';
+import * as THREE from "three";
+import { useRef, useState, useEffect, memo } from "react";
+import { Canvas, createPortal, useFrame, useThree } from "@react-three/fiber";
 import {
   useFBO,
   useScroll,
@@ -10,11 +10,11 @@ import {
   Preload,
   ScrollControls,
   MeshTransmissionMaterial,
-  Text
-} from '@react-three/drei';
-import { easing } from 'maath';
+  Text,
+} from "@react-three/drei";
+import { easing } from "maath";
 
-export default function FluidGlassSimple({ mode = 'lens' }) {
+export default function FluidGlassSimple({ mode = "lens" }) {
   return (
     <Canvas camera={{ position: [0, 0, 20], fov: 15 }} gl={{ alpha: true }}>
       <ScrollControls damping={0.2} pages={3} distance={0.4}>
@@ -75,21 +75,26 @@ const LensSimple = memo(function LensSimple({ children }) {
 function Images() {
   const group = useRef();
   const data = useScroll();
-  const { height } = useThree(s => s.viewport);
+  const { height } = useThree((s) => s.viewport);
 
   // Use your existing hero images or placeholder
-  const img1 = '/hero-2.avif';
-  const img2 = '/hero-3.avif';
-  const img3 = '/hero-4.avif';
+  const img1 = "/hero-2.avif";
+  const img2 = "/hero-3.avif";
+  const img3 = "/hero-4.avif";
 
   useFrame(() => {
     if (!group.current?.children) return;
     const children = group.current.children;
-    if (children[0]?.material) children[0].material.zoom = 1 + data.range(0, 1 / 3) / 3;
-    if (children[1]?.material) children[1].material.zoom = 1 + data.range(0, 1 / 3) / 3;
-    if (children[2]?.material) children[2].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
-    if (children[3]?.material) children[3].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
-    if (children[4]?.material) children[4].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
+    if (children[0]?.material)
+      children[0].material.zoom = 1 + data.range(0, 1 / 3) / 3;
+    if (children[1]?.material)
+      children[1].material.zoom = 1 + data.range(0, 1 / 3) / 3;
+    if (children[2]?.material)
+      children[2].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
+    if (children[3]?.material)
+      children[3].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
+    if (children[4]?.material)
+      children[4].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2;
   });
 
   return (
@@ -107,20 +112,20 @@ function Typography() {
   const DEVICE = {
     mobile: { fontSize: 0.2 },
     tablet: { fontSize: 0.4 },
-    desktop: { fontSize: 0.5 }
+    desktop: { fontSize: 0.5 },
   };
-  
+
   const getDevice = () => {
     const w = window.innerWidth;
-    return w <= 639 ? 'mobile' : w <= 1023 ? 'tablet' : 'desktop';
+    return w <= 639 ? "mobile" : w <= 1023 ? "tablet" : "desktop";
   };
 
   const [device, setDevice] = useState(getDevice());
 
   useEffect(() => {
     const onResize = () => setDevice(getDevice());
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const { fontSize } = DEVICE[device];
